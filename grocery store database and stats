@@ -1,0 +1,32 @@
+--Create a store database
+
+CREATE table WeMart (id INTEGER PRIMARY KEY, name TEXT, price INTEGER, aisle INTEGER, quantity INTEGER);
+INSERT into WeMart VALUES
+(1, "Oranges", 0.75, 3, 45),
+(2, "Grapes", 2.99, 1, 12),
+(3, "Blueberries", 2.99, 1, 10),
+(4, "Fresh Jackfruit", 10.99, 2, 3),
+(5, "Lemons", 0.50, 3, 25),
+(6, "Tahini", 6.99, 4, 11),
+(7, "Peanut Butter", 3.00, 4, 15),
+(8, "Organice Tofu", 1.99, 5, 20),
+(9, "Nutritional Yeast", 3.00, 5, 18),
+(10, "Coffee", 9.99, 5, 10),
+(11, "Dragonfruit", 4.00, 3, 9),
+(12, "Kale", 1.99, 1, 10),
+(13, "Lettuce", 1.50, 1, 10),
+(14, "Cabbage", 1.50, 1, 8),
+(15, "Avocado", 1.00, 1, 20);
+SELECT * FROM WeMart;
+
+--Display the database ordered by price
+
+SELECT * FROM WeMart ORDER BY price;
+
+--What is the maximum price in the store?
+
+SELECT MAX (price) FROM WeMart;
+
+--What is the minimum price in the store?
+
+SELECT MIN (price) FROM WeMart;
