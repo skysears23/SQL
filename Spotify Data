@@ -1,0 +1,60 @@
+/* For this project, I downloaded Spotify data from Kaggle. After creating a table to insert the Spotify data into, I then performed analytics on the data. */
+
+
+/*Calculate the average popularity for the artists in the Spotify data table. 
+Then, for every artist with an average popularity of 90 or above, show their name, their average popularity, 
+and label them as a “Top Star”. Analyze using a CTE*/
+
+WITH popularity_average_CTE AS (
+SELECT s.artist_name,
+AVG(s.popularity) AS average_popularity
+FROM SpotifyData s 
+GROUP BY s.artist_name
+)
+ 
+SELECT  artist_name,
+        average_popularity,
+        'Top Star' AS tag
+FROM popularity_average_CTE
+WHERE average_popularity>=90;
+
+
+/* What are the top 5 songs that have the greatest danceability and the highest tempo*/
+
+SELECT artist_name, track_name, MAX(danceability) AS Greatest_danceability, MAX(tempo) AS Max_tempo
+FROM spotifydata
+GROUP BY artist_name, track_id
+ORDER BY greatest_danceability DESC, max_tempo DESC
+LIMIT 5;
+
+/* What is the average tempo and danceability of the top 5 songs that have the highest danceabilty and max tempo?*/
+
+SELECT AVG(Max_tempo), AVG(greatest_danceability)
+FROM ( SELECT artist_name, track_name, MAX(danceability) AS Greatest_danceability, MAX(tempo) AS Max_tempo
+FROM spotifydata
+GROUP BY artist_name, track_id
+ORDER BY greatest_danceability DESC, max_tempo DESC
+LIMIT 5);
+
+/*Who are the top 5 most popular artist?*/
+
+SELECT artist_name, popularity
+FROM spotifydata
+GROUP BY artist_name, popularity
+ORDER BY popularity DESC
+LIMIT 5 ;
+
+/*Which artist has the longest song*/
+
+SELECT artist_name, track_name, duration_ms
+FROM spotifydata
+ORDER BY duration_ms DESC
+LIMIT 1;
+
+/*What's the average danceability for the 10 most popular songs?*/
+
+SELECT track_name, popularity, AVG(danceability) AS [Avg danceability]
+FROM spotifydata
+GROUP BY track_name, popularity
+ORDER BY popularity DESC
+LIMIT 10;
